@@ -42,7 +42,7 @@ fn main() {
         println!("Regenerating {} from {}", dest, src);
 
         // Parse the proto files as the protobuf-codegen-pure crate does.
-        let p = parse_and_typecheck(&["proto"], &[src]).expect("protoc");
+        let p = parse_and_typecheck(&[Path::new("proto")], &[Path::new(src)]).expect("protoc");
         // But generate them with the protobuf-codegen crate directly.
         // Then we can keep the result in-memory.
         let result = protobuf_codegen::gen(&p.file_descriptors, &p.relative_paths, &customizations);
